@@ -13,7 +13,19 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData()
+  const {data} = useData()
+  const last = data?.events?.[0]; // Prendre le premier événement
+  console.log("Data fetched:", data);
+  console.log("Last event:", last);
+
+  if (!data) {
+    return <p>Loading...</p>; // Afficher "Loading..." tant que les données ne sont pas récupérées
+  }
+
+  if (!last || !last.cover || !last.title) {
+    return <p>No event data available</p>; // Si `last` ou ses propriétés sont manquantes
+  }
+
   return <>
     <header>
       <Menu />
@@ -158,3 +170,10 @@ const Page = () => {
 }
 
 export default Page;
+
+// Ce qui a été corrigé (25/03/2025) :
+// - la const data récupère dorénavant les données
+// - la const last procède à une vérification de l'existence des données et de l'event, si c'est null ou undefined ?. le renvoi dans la console
+// au lieu de renvoyer une erreur, avec [0] on cherche à récupérer le premier élément du tableau events
+// - les deux if du dessous permettent d'éviter des erreurs dans le cas où les données ne serait pas récupérer ou dans le cas où elles sont
+// manquantes
