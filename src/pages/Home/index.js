@@ -18,13 +18,13 @@ const Page = () => {
   console.log("Data fetched:", data);
   console.log("Last event:", last);
 
-  if (!data) {
+  /* if (!data) {
     return <p>Loading...</p>; // Afficher "Loading..." tant que les données ne sont pas récupérées
   }
 
   if (!last || !last.cover || !last.title) {
     return <p>No event data available</p>; // Si `last` ou ses propriétés sont manquantes
-  }
+  } */
 
   return <>
     <header>
@@ -65,7 +65,8 @@ const Page = () => {
       </section>
       <section className="EventsContainer">
         <h2 className="Title">Nos réalisations</h2>
-        <EventList />
+         {/* <EventList /> */}
+         {data ? <EventList /> : <p>Chargement des événements...</p>}
       </section>
       <section className="PeoplesContainer">
         <h2 className="Title">Notre équipe</h2>
@@ -128,13 +129,24 @@ const Page = () => {
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
-        <EventCard
+        {/* <EventCard
           imageSrc={last?.cover}
           title={last?.title}
           date={new Date(last?.date)}
           small
           label="boom"
-        />
+        /> */}
+        {data && last ? (
+            <EventCard
+              imageSrc={last.cover}
+              title={last.title}
+              date={new Date(last.date)}
+              small
+              label="boom"
+            />
+          ) : (
+            <p>Chargement de l&apos;événement...</p>
+          )}
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
@@ -177,3 +189,10 @@ export default Page;
 // au lieu de renvoyer une erreur, avec [0] on cherche à récupérer le premier élément du tableau events
 // - les deux if du dessous permettent d'éviter des erreurs dans le cas où les données ne serait pas récupérer ou dans le cas où elles sont
 // manquantes
+
+// Ce qui a été corrigé (31/03/2025) : 
+// les erreurs de détection des textes email et envoyer par les test à cause du fais que toutes la page était affiché en Loading en attendant
+// les datas plutôt que uniquement quelques éléments concernés à été changés, et a été relocalisé précisèment à la ligne 69 pour la détection
+// de data et à la ligne 139 pour la détection de data et last
+// - ligne 69 : si data existe (est détecté) alors on affiche le composant, sinon on affiche un message en attendant
+// - ligne 139 : si data et last existe, alors le composant et ses informations sont affichés, sinon on affiche un message également
