@@ -14,7 +14,7 @@ import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
   const {data} = useData()
-  const last = data?.events?.[0]; // Changement à ces deux lignes + ligne 58 et 121
+  const last = data?.events?.[0];
 
   return <>
     <header>
@@ -164,16 +164,3 @@ const Page = () => {
 }
 
 export default Page;
-
-// Ce qui a été corrigé (25/03/2025) :
-// - la const data récupère dorénavant les données
-// - la const last procède à une vérification de l'existence des données et de l'event, si c'est null ou undefined ?. le renvoi dans la console
-// au lieu de renvoyer une erreur, avec [0] on cherche à récupérer le premier élément du tableau events
-
-// Ce qui a été corrigé (31/03/2025) : 
-// les erreurs de détection des textes email et envoyer par les test à cause du fais que toutes la page était affiché en Loading en attendant
-// les datas plutôt que uniquement quelques éléments concernés à été changés, et a été relocalisé précisèment à la ligne 69 pour la détection
-// de data et à la ligne 139 pour la détection de data et last, ça permets d'éviter des erreurs dans le cas où des données ne sont pas
-// récupéré ou si elles sont manquantes
-// - ligne 69 : si data existe (est détecté) alors on affiche le composant, sinon on affiche un message en attendant
-// - ligne 139 : si data et last existe, alors le composant et ses informations sont affichés, sinon on affiche un message également

@@ -16,7 +16,7 @@ const Select = ({
   const [value, setValue] = useState();
   const [collapsed, setCollapsed] = useState(true);
   const changeValue = (newValue) => {
-    onChange(newValue); // ajout du newValue, ça permets de signaler au code qu'un changement a été effectué dans ma sélection d'une catégorie
+    onChange(newValue);
     setValue(newValue);
     setCollapsed(newValue);
   };

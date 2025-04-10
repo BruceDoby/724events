@@ -14,7 +14,6 @@ const EventList = () => {
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
 
-  // changement ligne 19
   const filteredEvents = (
     (type ? data?.events.filter((event) => event.type === type) : data?.events) || []
   ).filter((event, index) => {
@@ -75,9 +74,3 @@ const EventList = () => {
 };
 
 export default EventList;
-
-// Correction effectuée (26/03/2025) : 
-// - changement à la ligne 19, le code se contentait simplement de récupérer les évènements sans appliquer de filtres, si un type est
-// sélectionné, donc une catégorie, en fonction du type cliqué une comparaison se fera avec les éléments ayant le même et ainsi seul
-// ceux-là seront affiché, sinon tout les éléments sont affichés, et si les données ne sont pas chargés alors un tableau vide est retourné
-// - ligne 21 les éléments ont simplement été mis sur la même ligne

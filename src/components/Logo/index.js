@@ -120,7 +120,3 @@ Logo.defaultProps = {
 }
 
 export default Logo;
-
-// ce qui a été corrigé (25/03/2025) :
-// font-family, font-size, font-weight et white-space ont été corrigé en fontFamily, fontSize, fontWeight et whiteSpace, l'écriture
-// précédente n'étant pas supporté par react, cela généré une erreur
